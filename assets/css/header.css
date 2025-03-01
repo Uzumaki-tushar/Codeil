@@ -1,0 +1,19 @@
+#header {
+  background: #8a2be2;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; }
+  #header ul {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-right: 1rem; }
+  #header #header-text {
+    font-weight: bold;
+    font-size: 3rem; }
+  #header a {
+    color: white;
+    text-decoration: none; }
