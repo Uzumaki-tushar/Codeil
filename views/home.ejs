@@ -11,6 +11,12 @@
     <%- include('_header') %>
     <div id="main">
     <h1>Welcome home </h1>
+    <div id="create-post">
+        <form action="/posts/create-post" method="post">
+            <textarea name="content" id="content" cols="20" rows="5"></textarea>
+            <input type="submit">
+        </form>
+    </div>
     </div>
     <%- include('footer')%>
 </body>

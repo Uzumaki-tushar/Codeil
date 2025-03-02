@@ -5,8 +5,10 @@ const userController=require('../controllers/user_controllers.js');
 
 router.get('/',homeContoller.home);
 router.use('/users',require('./users.js'));
+router.use('/posts',require('./post.js'));
 router.get('/login',userController.login);
 router.get('/registration',userController.register);
+
 
 
 module.exports=router;
