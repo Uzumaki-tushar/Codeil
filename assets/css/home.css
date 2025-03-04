@@ -11,3 +11,20 @@ body {
     height: 100%;
     width: 100%;
     background: lightblue; }
+    body #main #allPosts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin: 0.5rem; }
+      body #main #allPosts #post {
+        background: lightcoral;
+        border: 2px solid black;
+        padding: 0.6rem; }
+        body #main #allPosts #post #comments-box {
+          margin-top: 1rem;
+          background: gray; }
+          body #main #allPosts #post #comments-box #comment {
+            padding: 0.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between; }

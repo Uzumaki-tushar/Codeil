@@ -1,3 +1,12 @@
-module.exports.home=function(req,res){
-    return res.render('home',{name:"tushar"});
+const Post=require('../models/post');
+
+
+module.exports.home= async function(req,res){
+    const posts=await Post.find().populate('user').populate({
+        path:'comments',
+        populate:{
+            path:'user',
+        }
+    })
+    return res.render('home',{posts:posts});
 }

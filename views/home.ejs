@@ -1,23 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="/css/home.css">
-    
-</head>
-<body>
+    <link rel="stylesheet" href="/css/home.css" />
+  </head>
+  <body>
     <%- include('_header') %>
     <div id="main">
-    <h1>Welcome home </h1>
-    <div id="create-post">
+      <h1>Welcome home</h1>
+      <%if(locals.user){%>
+      <div id="create-post">
         <form action="/posts/create-post" method="post">
-            <textarea name="content" id="content" cols="20" rows="5"></textarea>
-            <input type="submit">
+          <textarea
+            name="content"
+            id="content"
+            cols="20"
+            rows="5"
+            placeholder="write post..."
+          ></textarea>
+          <input type="submit" value="post" />
         </form>
-    </div>
+      </div>
+
+      <div id="allPosts">
+        <% for(post of posts){%>
+        <div id="post">
+          <h2>Post Title</h2>
+          <p><%=post.content %></p>
+          <span><%=post.user.username%></span>
+
+          <div id="add-comment">
+            <form action="/comments/create/<%=post._id%>" method="post">
+              <input type="text" name="content" placeholder="write comments" />
+              <input type="hidden" />
+              <input type="submit" value="comment" />
+            </form>
+          </div>
+
+          <div id="comments-box">
+            <%for(comment of post.comments){ %>
+              <div id="comment">
+              <p><%=comment.content%></p>
+              <span>@<%=comment.user.username%></span>
+              </div>
+           <% } %>
+          </div>
+        </div>
+        <% }%>
+      </div>
+
+      <%}%>
     </div>
     <%- include('footer')%>
-</body>
+  </body>
 </html>

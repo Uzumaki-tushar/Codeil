@@ -6,6 +6,7 @@ const userController=require('../controllers/user_controllers.js');
 router.get('/',homeContoller.home);
 router.use('/users',require('./users.js'));
 router.use('/posts',require('./post.js'));
+router.use('/comments',require('./comment.js'))
 router.get('/login',userController.login);
 router.get('/registration',userController.register);
 
