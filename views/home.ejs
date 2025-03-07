@@ -26,32 +26,16 @@
 
       <div id="allPosts">
         <% for(post of posts){%>
-        <div id="post">
-          <h2>Post Title</h2>
-          <p><%=post.content %></p>
-          <span><%=post.user.username%></span>
-
-          <div id="add-comment">
-            <form action="/comments/create/<%=post._id%>" method="post">
-              <input type="text" name="content" placeholder="write comments" />
-              <input type="hidden" />
-              <input type="submit" value="comment" />
-            </form>
-          </div>
-
-          <div id="comments-box">
-            <%for(comment of post.comments){ %>
-              <div id="comment">
-              <p><%=comment.content%></p>
-              <span>@<%=comment.user.username%></span>
-              </div>
-           <% } %>
-          </div>
-        </div>
+          <%- include('_post') -%>
         <% }%>
       </div>
 
       <%}%>
+
+      <div id="user-friends">
+        <h4>Friends</h4>
+         
+      </div>
     </div>
     <%- include('footer')%>
   </body>

@@ -1,4 +1,5 @@
 const Post = require('../models/post');
+const Comment= require('../models/comments');
 
 module.exports.createPost=async(req,res)=>{
     try{
@@ -15,5 +16,26 @@ module.exports.createPost=async(req,res)=>{
     }
     catch(error){
         console.log(error);
+    }
+}
+
+module.exports.destroy= async function(req,res){
+    try{
+        const postId = req.params.id;
+        const post = await Post.findById(postId);
+        // user .id to convert object the string
+        if(post.user==req.user.id){
+            await Post.deleteOne({_id:post._id});
+
+            await Comment.deleteMany({post:postId});
+            return res.status(200).redirect('/');
+        }
+        else{
+            return res.status(403).json("you can't delete this post");
+        }
+    }
+    catch(error){
+        console.log(error);
+        return res.status(400).json("error");
     }
 }
