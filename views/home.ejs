@@ -5,38 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="/css/home.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+
   </head>
   <body>
     <%- include('_header') %>
-    <div id="main">
-      <h1>Welcome home</h1>
-      <%if(locals.user){%>
-      <div id="create-post">
-        <form action="/posts/create-post" method="post">
-          <textarea
-            name="content"
-            id="content"
-            cols="20"
-            rows="5"
-            placeholder="write post..."
-          ></textarea>
-          <input type="submit" value="post" />
-        </form>
-      </div>
 
-      <div id="allPosts">
-        <% for(post of posts){%>
-          <%- include('_post') -%>
-        <% }%>
-      </div>
+    <div id="main">
+      <section id="post-page">
+        <h1>Welcome home</h1>
+        <%if(locals.user){%>
+        <div id="create-post">
+          <form action="/posts/create-post" method="post">
+            <textarea
+              name="content"
+              id="content"
+              cols="20"
+              rows="5"
+              placeholder="write post..."
+            ></textarea>
+            <input type="submit" value="post" />
+          </form>
+        </div>
+
+        <div id="allPosts">
+          <% for(post of posts){%> <%- include('_post') -%> <% }%>
+        </div>
+      </section>
+
+      <section id="friends-page">
+        <div id="user-friends">
+          <h1>Friends</h1>
+          <% for(u of allUsers){ %>
+          <p>
+            <a href="users/profile/<%=u._id%>"><%= u.username %></a>
+          </p>
+          <% } %>
+        </div>
+      </section>
 
       <%}%>
-
-      <div id="user-friends">
-        <h4>Friends</h4>
-         
-      </div>
     </div>
     <%- include('footer')%>
+
+    <script>
+            <% if(flash.success && flash.success.length>0){%>
+              new Noty({
+                theme:'relax',
+                text: '<%=flash.success %>',
+                type: 'success',
+                layout:'topRight',
+                timeout:1500
+      }).show();
+            <%} %>
+
+
+            <% if(flash.error && flash.error.length>0){%>
+              new Noty({
+                theme:'relax',
+                text: '<%=flash.error %>',
+                type: 'error',
+                layout:'topRight',
+                timeout:1500
+      }).show();
+            <%} %>
+    </script>
   </body>
 </html>

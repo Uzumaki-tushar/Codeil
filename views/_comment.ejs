@@ -1,5 +1,7 @@
 <div id="comment">
     <p><%=comment.content%></p>
     <span>@<%=comment.user.username%></span>
+    <%if(locals.user.id==comment.user.id){ %>
     <a href="/comments/delete/<%=comment._id%>">delete</a>
+    <%}%>
     </div>

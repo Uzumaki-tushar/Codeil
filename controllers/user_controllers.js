@@ -1,6 +1,25 @@
 const User=require('../models/user');
 module.exports.profile=async function(req,res){
-    res.render('profile');   
+    const user=await User.findById(req.params.id).select("-password");
+    res.render('profile',{profile_user:user});   
+}
+
+module.exports.profileUpdate=async function(req,res){
+    try{
+    if(req.user.id==req.params.id){
+      const user=await User.findByIdAndUpdate(req.params.id,req.body,{new:true});
+      return res.redirect('/users/profile/'+req.params.id);
+    }
+    else{
+        return res.status(401).json("anuthorized");
+    }
+
+    }
+    catch(error){
+        console.log(error);
+        return res.status(501).json("Something went wrong");
+    }
+
 }
 
 module.exports.login=function(req,res){
@@ -40,6 +59,7 @@ module.exports.createSessions=async function(req,res){
     
     // //generate session for user
     // res.cookie('user',user.id);
+    req.flash('success','Logged in Successfully');
     return res.redirect('/');
 }
 
@@ -47,7 +67,10 @@ module.exports.logout=function(req,res){
     // res.cookie('user',"");
     // return res.redirect('/');
     req.logout(function(err) {
-        if (err) { return next(err); }
+        if (err) {
+            req.flash('error','Something went wrong');
+            return next(err); }
+        req.flash('success','Logged out Successfully'); 
         res.redirect('/');
       });
 }

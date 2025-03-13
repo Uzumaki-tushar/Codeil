@@ -10,21 +10,31 @@ body {
   body #main {
     height: 100%;
     width: 100%;
-    background: lightblue; }
-    body #main #allPosts {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1rem;
-      margin: 0.5rem; }
-      body #main #allPosts #post {
-        background: lightcoral;
-        border: 2px solid black;
-        padding: 0.6rem; }
-        body #main #allPosts #post #comments-box {
-          margin-top: 1rem;
-          background: gray; }
-          body #main #allPosts #post #comments-box #comment {
-            padding: 0.6rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between; }
+    position: absolute;
+    background: lightblue;
+    display: flex; }
+    body #main #post-page {
+      height: 100%;
+      width: 70%;
+      border-right: 2px solid black; }
+      body #main #post-page #allPosts {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        margin: 0.5rem; }
+        body #main #post-page #allPosts #post {
+          background: lightcoral;
+          border: 2px solid black;
+          padding: 0.6rem; }
+          body #main #post-page #allPosts #post #comments-box {
+            margin-top: 1rem;
+            background: gray; }
+            body #main #post-page #allPosts #post #comments-box #comment {
+              padding: 0.6rem;
+              display: flex;
+              align-items: center;
+              justify-content: space-between; }
+    body #main #friends-page {
+      height: 100%;
+      width: 30%;
+      padding: 1rem; }
